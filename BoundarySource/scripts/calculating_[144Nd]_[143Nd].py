@@ -54,7 +54,7 @@ print(cube)
 print(cube2)
 
 eNd_cube = cube[0] # Sediment area
-Nd_cube = cube2[0] # Volume gridbox
+nd_cube = cube2[0] # Volume gridbox
 
 
 
@@ -77,19 +77,19 @@ plt.show()
 
 """
 
-Nd144_cube = (Nd_cube/(isotopic_ratio+1.0))
-Nd144_cube.rename('Nd144_kg_m3_s_1E18')
-Nd144_cube.coord("depth_1").bounds = None
+nd144_cube = (nd_cube/(isotopic_ratio+1.0))
+nd144_cube.rename('Nd144_kg_m3_s_1E18')
+nd144_cube.coord("depth_1").bounds = None
 
 
 # Plot [144Nd]
-qplt.pcolormesh(Nd144_cube[0,0,:,:])
+qplt.pcolormesh(nd144_cube[0,0,:,:])
 plt.show()
 
-qplt.pcolormesh(Nd144_cube[0,10,:,:])
+qplt.pcolormesh(nd144_cube[0,10,:,:])
 plt.show()
 
-qplt.pcolormesh(Nd144_cube[0,18,:,:])
+qplt.pcolormesh(nd144_cube[0,18,:,:])
 plt.show()
 
 
@@ -99,28 +99,28 @@ plt.show()
 """
 
 # [Nd]/((IR^-1)+1)
-Nd143_cube = Nd_cube/((isotopic_ratio**-1.0)+1.0)
-Nd143_cube.rename('Nd143_kg_m3_s_1E18')
-Nd144_cube.coord("depth_1").bounds = None
+nd143_cube = nd_cube/((isotopic_ratio**-1.0)+1.0)
+nd143_cube.rename('Nd143_kg_m3_s_1E18')
+nd144_cube.coord("depth_1").bounds = None
 
 
 
 # Plot [143Nd]
-qplt.pcolormesh(Nd143_cube[0,0,:,:])
+qplt.pcolormesh(nd143_cube[0,0,:,:])
 plt.show()
 
-qplt.pcolormesh(Nd143_cube[0,2,:,:])
+qplt.pcolormesh(nd143_cube[0,2,:,:])
 plt.show()
 
-qplt.pcolormesh(Nd143_cube[0,18,:,:])
+qplt.pcolormesh(nd143_cube[0,18,:,:])
 plt.show()
 
-qplt.pcolormesh(Nd143_cube[0,:,:,0], vmin=0.00, vmax=0.001)
+qplt.pcolormesh(nd143_cube[0,:,:,0], vmin=0.00, vmax=0.001)
 plt.show()
 
 
-print(Nd144_cube.shape)
-print(Nd143_cube.shape)
+print(nd144_cube.shape)
+print(nd143_cube.shape)
 
 
 
@@ -134,9 +134,9 @@ units are kg(Nd)/m3/s (*1E18)
 # Use -999.999 when complete land mask and add land sea mask when creating ancil files 
 
 # Save [144Nd] as a netCDF file
-iris.save(Nd144_cube, "/Users/suzie/Documents/PhD_2ndYear/Self_Isolation_Work/Git/BoundarySource/boundary_conditions/Nd144_boundarySource_3000m.nc", fill_value=0.0, netcdf_format='NETCDF3_CLASSIC')
+iris.save(nd144_cube, "/Users/suzie/Documents/PhD_2ndYear/Self_Isolation_Work/Git/BoundarySource/boundary_conditions/Nd144_boundarySource_3000m.nc", fill_value=0.0, netcdf_format='NETCDF3_CLASSIC')
 # Save [143Nd] as a netCDF file as a netCDF file
-iris.save(Nd143_cube, "/Users/suzie/Documents/PhD_2ndYear/Self_Isolation_Work/Git/BoundarySource/boundary_conditions/Nd143_boundarySource_3000m.nc", fill_value=0.0, netcdf_format='NETCDF3_CLASSIC')
+iris.save(nd143_cube, "/Users/suzie/Documents/PhD_2ndYear/Self_Isolation_Work/Git/BoundarySource/boundary_conditions/Nd143_boundarySource_3000m.nc", fill_value=0.0, netcdf_format='NETCDF3_CLASSIC')
 
 
 
@@ -162,42 +162,42 @@ plt.suptitle("Bounday conditions for $^{144}Nd$ from boundary exchange kg/$m^{3}
 #For example, "111" means "1x1 grid, first subplot" and "234" means "2x3 grid, 4th subplot".
 ax1 = fig.add_subplot(321)
 ax1.set_title('Surface')
-iplt.pcolormesh(Nd144_cube[0,0,:,:], vmin=0.0, vmax=0.001, cmap=cmap)
+iplt.pcolormesh(nd144_cube[0,0,:,:], vmin=0.0, vmax=0.001, cmap=cmap)
 plt.colorbar(ax=ax1, orientation="horizontal", extend='max')
 ax1 = plt.gca()
 ax1.coastlines()
 
 ax2 = fig.add_subplot(322)
 ax2.set_title('67 m depth ')
-iplt.pcolormesh(Nd144_cube[0,5,:,:], vmin=0.0, vmax=0.6, cmap=cmap)
+iplt.pcolormesh(nd144_cube[0,5,:,:], vmin=0.0, vmax=0.6, cmap=cmap)
 plt.colorbar(ax=ax2, orientation="horizontal", extend='max')
 ax2 = plt.gca()
 ax2.coastlines()
 
 ax3 = fig.add_subplot(323)
 ax3.set_title('447 m depth ')
-iplt.pcolormesh(Nd144_cube[0,10,:,:], vmin=0.0, vmax=0.6, cmap=cmap)
+iplt.pcolormesh(nd144_cube[0,10,:,:], vmin=0.0, vmax=0.6, cmap=cmap)
 plt.colorbar(ax=ax3, orientation="horizontal", extend='max')
 ax3 = plt.gca()
 ax3.coastlines()
 
 ax4 = fig.add_subplot(324)
 ax4.set_title('4577 m depth')
-iplt.pcolormesh(Nd144_cube[0,18,:,:], vmin=0.0, vmax=0.6, cmap=cmap)
+iplt.pcolormesh(nd144_cube[0,18,:,:], vmin=0.0, vmax=0.6, cmap=cmap)
 plt.colorbar(ax=ax4, orientation="horizontal", extend='max')
 ax4 = plt.gca()
 ax4.coastlines()
 
 ax5 = fig.add_subplot(325)
 ax5.set_title('5192.65 m depth')
-iplt.pcolormesh(Nd144_cube[0,19,:,:], vmin=0.0, vmax=0.6, cmap=cmap)
+iplt.pcolormesh(nd144_cube[0,19,:,:], vmin=0.0, vmax=0.6, cmap=cmap)
 plt.colorbar(ax=ax5, orientation="horizontal", extend='max')
 ax5 = plt.gca()
 ax5.coastlines()
 
 ax6 = fig.add_subplot(326)
 ax6.set_title(' cross section')
-iplt.pcolormesh(Nd144_cube[0,:,:,0], vmin=0.0, vmax=0.003, cmap=cmap)
+iplt.pcolormesh(nd144_cube[0,:,:,0], vmin=0.0, vmax=0.003, cmap=cmap)
 plt.colorbar(ax=ax6, orientation="horizontal", extend='max')
 
 
@@ -219,42 +219,42 @@ plt.suptitle("Bounday conditions for $^{143}Nd$ from boundary exchange kg/$m^{3}
 #For example, "111" means "1x1 grid, first subplot" and "234" means "2x3 grid, 4th subplot".
 ax1 = fig.add_subplot(321)
 ax1.set_title('Surface')
-iplt.pcolormesh(Nd143_cube[0,0,:,:], vmin=0.0, vmax=0.001, cmap=cmap)
+iplt.pcolormesh(nd143_cube[0,0,:,:], vmin=0.0, vmax=0.001, cmap=cmap)
 plt.colorbar(ax=ax1, orientation="horizontal", extend='max')
 ax1 = plt.gca()
 ax1.coastlines()
 
 ax2 = fig.add_subplot(322)
 ax2.set_title('67 m depth ')
-iplt.pcolormesh(Nd143_cube[0,5,:,:], vmin=0.0, vmax=0.6, cmap=cmap)
+iplt.pcolormesh(nd143_cube[0,5,:,:], vmin=0.0, vmax=0.6, cmap=cmap)
 plt.colorbar(ax=ax2, orientation="horizontal", extend='max')
 ax2 = plt.gca()
 ax2.coastlines()
 
 ax3 = fig.add_subplot(323)
 ax3.set_title('447 m depth ')
-iplt.pcolormesh(Nd143_cube[0,10,:,:], vmin=0.0, vmax=0.6, cmap=cmap)
+iplt.pcolormesh(nd143_cube[0,10,:,:], vmin=0.0, vmax=0.6, cmap=cmap)
 plt.colorbar(ax=ax3, orientation="horizontal", extend='max')
 ax3 = plt.gca()
 ax3.coastlines()
 
 ax4 = fig.add_subplot(324)
 ax4.set_title('4577 m depth')
-iplt.pcolormesh(Nd143_cube[0,18,:,:], vmin=0.0, vmax=0.6, cmap=cmap)
+iplt.pcolormesh(nd143_cube[0,18,:,:], vmin=0.0, vmax=0.6, cmap=cmap)
 plt.colorbar(ax=ax4, orientation="horizontal", extend='max')
 ax4 = plt.gca()
 ax4.coastlines()
 
 ax5 = fig.add_subplot(325)
 ax5.set_title('5192.65 m depth')
-iplt.pcolormesh(Nd143_cube[0,19,:,:], vmin=0.0, vmax=0.6, cmap=cmap)
+iplt.pcolormesh(nd143_cube[0,19,:,:], vmin=0.0, vmax=0.6, cmap=cmap)
 plt.colorbar(ax=ax5, orientation="horizontal", extend='max')
 ax5 = plt.gca()
 ax5.coastlines()
 
 ax6 = fig.add_subplot(326)
 ax6.set_title(' cross section')
-iplt.pcolormesh(Nd143_cube[0,:,:,0], vmin=0.0, vmax=0.003, cmap=cmap)
+iplt.pcolormesh(nd143_cube[0,:,:,0], vmin=0.0, vmax=0.003, cmap=cmap)
 plt.colorbar(ax=ax6, orientation="horizontal", extend='max')
 
 

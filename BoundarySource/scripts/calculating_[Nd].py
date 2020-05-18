@@ -82,7 +82,7 @@ def area_ratio(sed_cube):
     for j in range(0,lon):
         for i in range(0,lat):
             for k in range(0,depth):
-                area_ratio_data[k,i,j]= 1.0 * (sed_data[k,i,j]/A_TOTAL)
+                area_ratio_data[k,i,j]= (sed_data[k,i,j]/A_TOTAL) 
     
     area_ratio_cube = sed_cube.copy(data=area_ratio_data)
     return area_ratio_cube
@@ -104,7 +104,7 @@ def volume_ratio(vol_cube):
     for j in range(0,lon):
         for i in range(0,lat):
             for k in range(0,depth):
-                volume_ratio_data[0,k,i,j] = 1.0 * (1.0/vol_data[0,k,i,j])
+                volume_ratio_data[0,k,i,j] = (1.0/vol_data[0,k,i,j]) 
     volume_ratio_cube= vol_cube.copy(data=volume_ratio_data)
     return volume_ratio_cube
 
